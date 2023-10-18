@@ -293,9 +293,9 @@ namespace RPC {
                 do {
                     Core::IUnknown* iface = loop->Unknown();
                     
-                    ASSERT(iface != nullptr);
+                    ASSERT((iface != nullptr) ||(IsClosed()));
 
-                    if (iface != nullptr) {
+                    if ((iface != nullptr) && (IsClosed())) {
                         result = iface->Release();
                     }
                 } while ((loop->Decrement()) && (result == Core::ERROR_NONE));
